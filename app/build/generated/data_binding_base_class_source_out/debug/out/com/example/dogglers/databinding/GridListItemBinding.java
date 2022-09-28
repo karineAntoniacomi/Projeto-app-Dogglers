@@ -24,15 +24,19 @@ public final class GridListItemBinding implements ViewBinding {
   public final TextView dogAge;
 
   @NonNull
+  public final TextView dogHobbie;
+
+  @NonNull
   public final ImageView dogImage;
 
   @NonNull
   public final TextView dogName;
 
   private GridListItemBinding(@NonNull MaterialCardView rootView, @NonNull TextView dogAge,
-      @NonNull ImageView dogImage, @NonNull TextView dogName) {
+      @NonNull TextView dogHobbie, @NonNull ImageView dogImage, @NonNull TextView dogName) {
     this.rootView = rootView;
     this.dogAge = dogAge;
+    this.dogHobbie = dogHobbie;
     this.dogImage = dogImage;
     this.dogName = dogName;
   }
@@ -70,6 +74,12 @@ public final class GridListItemBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.dog_hobbie;
+      TextView dogHobbie = ViewBindings.findChildViewById(rootView, id);
+      if (dogHobbie == null) {
+        break missingId;
+      }
+
       id = R.id.dog_image;
       ImageView dogImage = ViewBindings.findChildViewById(rootView, id);
       if (dogImage == null) {
@@ -82,7 +92,8 @@ public final class GridListItemBinding implements ViewBinding {
         break missingId;
       }
 
-      return new GridListItemBinding((MaterialCardView) rootView, dogAge, dogImage, dogName);
+      return new GridListItemBinding((MaterialCardView) rootView, dogAge, dogHobbie, dogImage,
+          dogName);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
